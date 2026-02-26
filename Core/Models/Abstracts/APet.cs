@@ -8,6 +8,7 @@ namespace Tamagochi.Core.Models.Abstracts
     public abstract class APet
     {
         public string Name { get; set; }
+        public DateTime DateBirth { get; set; }
         public EEmotions State { get; set; } = EEmotions.Happy;
         public bool DeadState { get; set; } = false;
         public Stats Stats { get; set; }
@@ -15,6 +16,7 @@ namespace Tamagochi.Core.Models.Abstracts
         public APet(string name)
         {
             Name = name;
+            DateBirth = DateTime.Now;
         }
     }
 }
