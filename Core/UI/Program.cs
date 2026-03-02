@@ -9,6 +9,8 @@ public class Program
     {
         Console.OutputEncoding = System.Text.Encoding.Unicode;
 
+        const int minMenuValue = 1, maxMenuValue = 5, minPetOptValue = 1, maxPetOptValue = 5;
+
         string petName;
         int petSelector = 0, op = 0;
         bool existingOpt;
@@ -16,15 +18,10 @@ public class Program
 
         //Delete this pet when finished testing
         Cat gato = new Cat("XD");
-        /*
+        
         do
         {
-            Console.WriteLine(UIConfig.ChoosePet.Selection);
-            Console.WriteLine(UIConfig.ChoosePet.Dog);
-            Console.WriteLine(UIConfig.ChoosePet.Cat);
-            Console.WriteLine(UIConfig.ChoosePet.Chicken);
-            Console.WriteLine(UIConfig.ChoosePet.Robot);
-            Console.WriteLine(UIConfig.ChoosePet.Cactus);
+            UIConfig.ShowPetOptions();
 
             try
             {
@@ -47,10 +44,10 @@ public class Program
                 existingOpt = false;
             }
             Console.Clear();
-            if(petSelector < 1 || petSelector > 5)
+            if(petSelector < minPetOptValue || petSelector > maxPetOptValue)
             {
                 existingOpt = false;
-                Console.WriteLine(UIConfig.IntErrorControl.NotAnOptionError);
+                Console.WriteLine(UIConfig.IntErrorControl.NotAPetOptError);
             }
         } while (!existingOpt);
 
@@ -61,15 +58,12 @@ public class Program
         {
             petName = "SinNombre";
         }
-
-        petName = petName.Substring(0, 1).ToUpper() + petName.Substring(1).ToLower();
-        */
+        
         do
         {
-            ShowGameBase(gato);
+            UIConfig.ShowGameBase(gato);
             ShowPet(gato);
-            ShowActions();
-            Console.WriteLine(gato.Stats.Hp);
+            UIConfig.ShowActions();
             do
             {
                 try
@@ -92,7 +86,7 @@ public class Program
                     Console.WriteLine(UIConfig.IntErrorControl.FormatError);
                     existingOpt = false;
                 }
-                if (op < 1 || op > 5)
+                if (op < minMenuValue || op > maxMenuValue)
                 {
                     existingOpt = false;
                     Console.WriteLine(UIConfig.IntErrorControl.NotAMenuOptError);
@@ -116,14 +110,7 @@ public class Program
             
 
         } while (!gato.DeadState);
-    }
-    public static void ShowGameBase(APet pet)
-    {
-        Console.WriteLine(UIConfig.TamagochiBase.SquareBase);
-        Console.WriteLine(UIConfig.TamagochiBase.petInfo, pet.Name, pet.State);
-        Console.WriteLine(UIConfig.TamagochiBase.petBirth, pet.DateBirth);
-        Console.WriteLine(UIConfig.TamagochiBase.SquareBase);
-    }
+    }    
     public static void ShowPet(APet pet)
     {
         switch (pet)
@@ -139,13 +126,5 @@ public class Program
                 break;
             
         }
-    }
-    public static void ShowActions()
-    {
-        Console.WriteLine(UIConfig.ActionsMenu.Play);
-        Console.WriteLine(UIConfig.ActionsMenu.Eat);
-        Console.WriteLine(UIConfig.ActionsMenu.Sleep);
-        Console.WriteLine(UIConfig.ActionsMenu.Inventory);
-        Console.WriteLine(UIConfig.ActionsMenu.Exit);
     }
 }

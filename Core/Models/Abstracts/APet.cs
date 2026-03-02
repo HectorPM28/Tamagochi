@@ -16,7 +16,8 @@ namespace Tamagochi.Core.Models.Abstracts
         public APet(string name)
         {
             Name = name;
-            DateBirth = DateTime.Now;            
+            DateBirth = DateTime.Now;
+            Stats = new Stats();
         }
     }
 }

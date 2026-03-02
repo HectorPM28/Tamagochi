@@ -11,7 +11,7 @@ namespace Tamagochi.Core.Interfaces
     {
         public void Eat(APet pet, Food food)
         {
-            Console.WriteLine(UIConfig.PetActions.Eat, pet.Name, food.GetType);
+            Console.WriteLine(UIConfig.PetActions.Eat, pet.Name, food.Type);
         }
     }
 }

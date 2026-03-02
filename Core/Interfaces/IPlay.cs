@@ -11,7 +11,7 @@ namespace Tamagochi.Core.Interfaces
     {
         public void Play(Toy toy, APet pet)
         {
-            Console.WriteLine(UIConfig.PetActions.Play, pet.Name, toy.Name);
+            Console.WriteLine(UIConfig.PetActions.Play, pet.Name, toy.Type);
         }
     }
 }

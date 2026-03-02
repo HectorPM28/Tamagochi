@@ -2,11 +2,34 @@
 using System.Collections.Generic;
 using System.Text;
 using Tamagochi.Core.Models;
+using Tamagochi.Core.Models.Abstracts;
 
 namespace Tamagochi.Core.UI
 {
     public static class UIConfig
     {
+        public static void ShowPetOptions()
+        {
+            Console.WriteLine(ChoosePet.Selection);
+            Console.WriteLine(ChoosePet.Dog);
+            Console.WriteLine(ChoosePet.Cat);
+            Console.WriteLine(ChoosePet.Chicken);
+        }
+        public static void ShowActions()
+        {
+            Console.WriteLine(ActionsMenu.Play);
+            Console.WriteLine(ActionsMenu.Eat);
+            Console.WriteLine(ActionsMenu.Sleep);
+            Console.WriteLine(ActionsMenu.Inventory);
+            Console.WriteLine(ActionsMenu.Exit);
+        }
+        public static void ShowGameBase(APet pet)
+        {
+            Console.WriteLine(TamagochiBase.SquareBase);
+            Console.WriteLine(TamagochiBase.petInfo, pet.Name, pet.State);
+            Console.WriteLine(TamagochiBase.petBirth, pet.DateBirth);
+            Console.WriteLine(TamagochiBase.SquareBase);
+        }
         public static class CatsSprites
         {
             public const string HappyCat = "      /\\_/\\      \r\n     ( ^‿^ )     \r\n     /       \\    \r\n    |         |   \r\n     \\__/\\___/    ";         

@@ -8,11 +8,11 @@ namespace Tamagochi.Core.Models
 {
     public class Toy: AItem
     {
-        public ETypeToys Name { get; set; }
+        public ETypeToys Type { get; set; }
 
-        public Toy(ETypeToys name)
+        public Toy(ETypeToys type)
         {
-            Name = name;
+            Type = type;
         }
     }
 }
