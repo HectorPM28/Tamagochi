@@ -10,15 +10,13 @@ public class Program
         Console.OutputEncoding = System.Text.Encoding.Unicode;
 
         string petName;
-        int petSelector = 0;
+        int petSelector = 0, op = 0;
         bool existingOpt;
 
-        Console.WriteLine(UIConfig.RobotSprites.HappyRobot);
-        Console.WriteLine(UIConfig.RobotSprites.SadRobot);
-        Console.WriteLine(UIConfig.RobotSprites.AngryRobot);
-        Console.WriteLine(UIConfig.RobotSprites.TiredRobot);
-        Console.WriteLine(UIConfig.RobotSprites.SickRobot);
 
+        //Delete this pet when finished testing
+        Cat gato = new Cat("XD");
+        /*
         do
         {
             Console.WriteLine(UIConfig.ChoosePet.Selection);
@@ -49,6 +47,11 @@ public class Program
                 existingOpt = false;
             }
             Console.Clear();
+            if(petSelector < 1 || petSelector > 5)
+            {
+                existingOpt = false;
+                Console.WriteLine(UIConfig.IntErrorControl.NotAnOptionError);
+            }
         } while (!existingOpt);
 
         Console.WriteLine(UIConfig.ChoosePet.SetName);
@@ -60,26 +63,59 @@ public class Program
         }
 
         petName = petName.Substring(0, 1).ToUpper() + petName.Substring(1).ToLower();
-
-        switch (petSelector)
+        */
+        do
         {
-            case 1:
-                Dog playerDog = new Dog(petName);
-                ShowGameBase(playerDog);
-                break;
-            case 2:
-                Cat playerCat = new Cat(petName);
-                break;
-            case 3:
-                Chicken playerChicken = new Chicken(petName);
-                break;
-            case 4:
-                Robot playerRobot = new Robot(petName);
-                break;
-            case 5:
-                Cactus playerCactus = new Cactus(petName);
-                break;
-        }
+            ShowGameBase(gato);
+            ShowPet(gato);
+            ShowActions();
+            Console.WriteLine(gato.Stats.Hp);
+            do
+            {
+                try
+                {
+                    op = Convert.ToInt32(Console.ReadLine());
+                    existingOpt = true;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine(UIConfig.IntErrorControl.FormatError);
+                    existingOpt = false;
+                }
+                catch (OverflowException)
+                {
+                    Console.WriteLine(UIConfig.IntErrorControl.OverflowException);
+                    existingOpt = false;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine(UIConfig.IntErrorControl.FormatError);
+                    existingOpt = false;
+                }
+                if (op < 1 || op > 5)
+                {
+                    existingOpt = false;
+                    Console.WriteLine(UIConfig.IntErrorControl.NotAMenuOptError);
+                }
+            } while (!existingOpt);
+
+            switch (op)
+            {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    gato.DeadState = true;
+                    break;
+            }
+            
+
+        } while (!gato.DeadState);
     }
     public static void ShowGameBase(APet pet)
     {
@@ -87,5 +123,29 @@ public class Program
         Console.WriteLine(UIConfig.TamagochiBase.petInfo, pet.Name, pet.State);
         Console.WriteLine(UIConfig.TamagochiBase.petBirth, pet.DateBirth);
         Console.WriteLine(UIConfig.TamagochiBase.SquareBase);
+    }
+    public static void ShowPet(APet pet)
+    {
+        switch (pet)
+        {
+            case Cat:
+                Cat.ShowEmotion(pet);
+                break;
+            case Dog:
+                Dog.ShowEmotion(pet);
+                break;
+            case Chicken:
+                Chicken.ShowEmotion(pet);
+                break;
+            
+        }
+    }
+    public static void ShowActions()
+    {
+        Console.WriteLine(UIConfig.ActionsMenu.Play);
+        Console.WriteLine(UIConfig.ActionsMenu.Eat);
+        Console.WriteLine(UIConfig.ActionsMenu.Sleep);
+        Console.WriteLine(UIConfig.ActionsMenu.Inventory);
+        Console.WriteLine(UIConfig.ActionsMenu.Exit);
     }
 }
