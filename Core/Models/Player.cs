@@ -9,5 +9,10 @@ namespace Tamagochi.Core.Models
     {
         public APet Pet { get; set; }
         public Inventory Inventory { get; set; }
+        public Player(APet pet, Inventory inv)
+        {
+            Pet = pet;
+            Inventory = inv;
+        }
     }
 }

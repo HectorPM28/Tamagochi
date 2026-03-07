@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 using Tamagochi.Core.Models.Abstracts;
 using Tamagochi.Core.Models.Enum;
 
 namespace Tamagochi.Core.Models
 {
-    public class Clothing: AItem
+    public class Food: AItem
     {
-        public ETypeClothes Name { get; set; }
-
-        public Clothing (ETypeClothes name)
+        public ETypeFood Type { get; set; }
+        public Food(ETypeFood type)
         {
-            Name = name;
+            Type = type;
         }
     }
 }

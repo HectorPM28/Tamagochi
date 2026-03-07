@@ -4,10 +4,9 @@ using System.Text;
 
 namespace Tamagochi.Core.Models.Enum
 {
-    public enum ETypeSnack
+    public enum ETypeFood
     {
-        Cookie = 20,
-        Apple = 15,
-        Crisps = 10
+        Meal,
+        Snack
     }
 }
