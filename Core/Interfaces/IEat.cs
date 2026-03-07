@@ -7,7 +7,7 @@ using Tamagochi.Core.UI;
 
 namespace Tamagochi.Core.Interfaces
 {
-    public interface ISatiety
+    public interface IEat
     {
         public void Eat(APet pet, Food food)
         {

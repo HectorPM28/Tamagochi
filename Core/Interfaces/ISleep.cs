@@ -6,11 +6,8 @@ using Tamagochi.Core.UI;
 
 namespace Tamagochi.Core.Interfaces
 {
-    public interface IEnergy
+    public interface ISleep
     {
-        public void Sleep(APet pet)
-        {
-            Console.WriteLine(UIConfig.PetActions.Sleep, pet.Name);
-        }
+        void Sleep(APet pet);
     }
 }

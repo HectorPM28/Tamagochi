@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Tamagochi.Core.Interfaces;
 using Tamagochi.Core.Models.Abstracts;
 using Tamagochi.Core.Models.Enum;
 using Tamagochi.Core.UI;
 
 namespace Tamagochi.Core.Models
 {
-    public class Cat: APet
+    public class Cat: APet, ISleep, IEat, IPlay
     {
         public Cat(string name) : base(name)
         {
@@ -33,6 +34,11 @@ namespace Tamagochi.Core.Models
                     Console.WriteLine(UIConfig.CatsSprites.SickCat);
                     break;
             }
+        }
+        public void Sleep(APet pet)
+        {
+            Console.WriteLine(UIConfig.PetActions.Sleep, pet.Name);
+            pet.Stats.Energy += 30;
         }
     }
 }

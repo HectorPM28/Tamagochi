@@ -15,6 +15,12 @@ namespace Tamagochi.Core.UI
             Console.WriteLine(ChoosePet.Cat);
             Console.WriteLine(ChoosePet.Chicken);
         }
+        public static void ShowStatsBars(APet pet)
+        {
+            Console.WriteLine($"{DrawStatBar(pet.Stats.Hp)} Hp");
+            Console.WriteLine($"{DrawStatBar(pet.Stats.Satiety)} Satiety");
+            Console.WriteLine($"{DrawStatBar(pet.Stats.Energy)} Energy");
+        }
         public static void ShowActions()
         {
             Console.WriteLine(ActionsMenu.Play);
@@ -90,6 +96,16 @@ namespace Tamagochi.Core.UI
             public const string Inventory = "4 - Inventory";
             public const string Exit = "5 - Kill the pet";
             
+        }
+        public static string DrawStatBar(int value)
+        {
+            int totalBlocks = 20;
+            int filledBlocks = value * totalBlocks / 100;
+
+            return "[" +
+                new string('#', filledBlocks) +
+                new string('-', totalBlocks - filledBlocks) +
+                $"] {value}%";
         }
     }
 }

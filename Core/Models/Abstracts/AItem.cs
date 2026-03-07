@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tamagochi.Core.Models.Abstracts
 {
-    public class AItem
+    public abstract class AItem
     {
         
     }
