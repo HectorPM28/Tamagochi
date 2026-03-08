@@ -6,7 +6,7 @@ namespace Tamagochi.Core.Models.Enum
 {
     public enum ETypeFood
     {
-        Meal,
-        Snack
+        Meal = 35,
+        Snack = 20
     }
 }

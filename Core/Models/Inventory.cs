@@ -15,7 +15,7 @@ namespace Tamagochi.Core.Models
 
         }
 
-        public void openInventory(Inventory inv)
+        public void OpenInventory(Inventory inv)
         {
             for (int i = 0; i < inv.items.Length; i++)
             {
@@ -23,7 +23,7 @@ namespace Tamagochi.Core.Models
                 if (inv.items[i] is Toy toy) Console.WriteLine($"{i + 1} - {toy.Type}");
             }
         }
-        public void addItem(AItem item, Inventory inv)
+        public void AddItem(AItem item, Inventory inv)
         {
             AItem[] invHelper = new AItem[inv.items.Length + 1];
             for (int i = 0; i < inv.items.Length; i++)
@@ -32,8 +32,9 @@ namespace Tamagochi.Core.Models
             }
             invHelper[invHelper.Length - 1] = item;
             inv.items = invHelper;
+            ReorganizeInventory(inv);
         }
-        public void deleteItem(AItem item, Inventory inv)
+        public void DeleteItem(AItem item, Inventory inv)
         {
             AItem[] invHelper = new AItem[inv.items.Length];
             for (int i = 0; i < inv.items.Length; i++)
@@ -44,9 +45,9 @@ namespace Tamagochi.Core.Models
                 }
             }
             inv.items = invHelper;
-            reorganizeInventory(inv);
+            ReorganizeInventory(inv);
         }
-        private void reorganizeInventory(Inventory inv)
+        private void ReorganizeInventory(Inventory inv)
         {
             int nullFoundHelper = 0;
             AItem[] invHelper = new AItem[inv.items.Length];
