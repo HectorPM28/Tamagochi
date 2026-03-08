@@ -63,6 +63,8 @@ namespace Tamagochi.Core.UI
             public const string OpenInventory = "1 - Open inventory";
             public const string AddItem = "2 - Add item to inventory";
             public const string RemoveItem = "3 - Remove item from inventory";
+            public const string ItemAdded = "You added a {0} to the inventory";
+            public const string DeleteItemMenu = "Which item would you like to delete";
         }
         public static class CatsSprites
         {
@@ -108,6 +110,7 @@ namespace Tamagochi.Core.UI
             public const string NotAMenuOptError = "Number must be between 1-5";
             public const string NotAInvOptError = "Number must be between 1-3";
             public const string NotAItemOptError = "Number must be between 1-5";
+            public const string NotInInvError = "You must select an exising item";
         }
         public static class TamagochiBase
         {

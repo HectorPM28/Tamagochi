@@ -14,7 +14,7 @@ public class Program
         const int minMenuValue = 1, maxMenuValue = 5, minPetOptValue = 1, maxPetOptValue = 3, minInvOpt = 1, maxInvOpt = 3, minItemOpt = 1, maxItemOpt = 5;
 
         string petName;
-        int petSelector = 0, op = 0, invOp = 0, itemOp = 0;
+        int petSelector = 0, op = 0, invOp = 0, itemOp = 0, deleteItemOp = 0;
         bool existingOpt = false;
 
         UIConfig.ShowPetOptions();
@@ -53,16 +53,19 @@ public class Program
                     }
                     break;
                 case 4:
+                    Console.Clear();
                     UIConfig.ShowInventoryOptions();
                     invOp = CheckInt(invOp, existingOpt, minInvOpt, maxInvOpt, UIConfig.IntErrorControl.NotAInvOptError);
 
                     switch (invOp)
                     {
                         case 1:
+                            Console.Clear();
                             player.Inventory.openInventory(player.Inventory);
                             Console.ReadKey();
                             break;
                         case 2:
+                            Console.Clear();
                             UIConfig.ShowItemOptions();
                             itemOp = CheckInt(itemOp, existingOpt, minItemOpt, maxItemOpt, UIConfig.IntErrorControl.NotAItemOptError);
 
@@ -71,26 +74,42 @@ public class Program
                                 case 1:
                                     Food meal = new Food(Tamagochi.Core.Models.Enum.ETypeFood.Meal);
                                     player.Inventory.addItem(meal, player.Inventory);
+                                    Console.WriteLine(UIConfig.InventoryOptions.ItemAdded, meal.Type);
+                                    Console.ReadKey();
                                     break;
                                 case 2:
                                     Food snack = new Food(Tamagochi.Core.Models.Enum.ETypeFood.Snack);
                                     player.Inventory.addItem(snack, player.Inventory);
+                                    Console.WriteLine(UIConfig.InventoryOptions.ItemAdded, snack.Type);
+                                    Console.ReadKey();
                                     break;
                                 case 3:
                                     Toy ball = new Toy(Tamagochi.Core.Models.Enum.ETypeToys.Ball);
                                     player.Inventory.addItem(ball, player.Inventory);
+                                    Console.WriteLine(UIConfig.InventoryOptions.ItemAdded, ball.Type);
+                                    Console.ReadKey();
                                     break;
                                 case 4:
                                     Toy rope = new Toy(Tamagochi.Core.Models.Enum.ETypeToys.Rope);
                                     player.Inventory.addItem(rope, player.Inventory);
+                                    Console.WriteLine(UIConfig.InventoryOptions.ItemAdded, rope.Type);
+                                    Console.ReadKey();
                                     break;
                                 case 5:
                                     Toy chewtoy = new Toy(Tamagochi.Core.Models.Enum.ETypeToys.ChewToy);
                                     player.Inventory.addItem(chewtoy, player.Inventory);
+                                    Console.WriteLine(UIConfig.InventoryOptions.ItemAdded, chewtoy.Type);
+                                    Console.ReadKey();
                                     break;
-                            }
+                            }                            
                             break;
                         case 3:
+                            Console.Clear();
+                            Console.WriteLine(UIConfig.InventoryOptions.DeleteItemMenu);
+                            player.Inventory.openInventory(player.Inventory);
+                            deleteItemOp = CheckInt(deleteItemOp, existingOpt, minItemOpt, player.Inventory.items.Length, UIConfig.IntErrorControl.NotInInvError);
+                            player.Inventory.deleteItem(player.Inventory.items[deleteItemOp - 1], player.Inventory);
+                            Console.ReadKey();
                             break;
                     }
                     break;

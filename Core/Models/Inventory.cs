@@ -49,16 +49,45 @@ namespace Tamagochi.Core.Models
                 }
             }
         }
-        public void addItem(AItem item, Inventory inventory)
+        public void addItem(AItem item, Inventory inv)
         {
-            AItem[] invHelper = new AItem[inventory.items.Length + 1];
-            for( int i = 0; i < inventory.items.Length; i++)
+            AItem[] invHelper = new AItem[inv.items.Length + 1];
+            for( int i = 0; i < inv.items.Length; i++)
             {
-                invHelper[i] = inventory.items[i];
+                invHelper[i] = inv.items[i];
             }
             invHelper[invHelper.Length - 1] = item;
-            inventory.items = invHelper;
+            inv.items = invHelper;
         }
-        public void deleteItem(AItem item) { }
+        public void deleteItem(AItem item, Inventory inv)
+        {
+            AItem[] invHelper = new AItem[inv.items.Length];
+            for (int i = 0; i < inv.items.Length; i++)
+            {
+                if (inv.items[i] != item)
+                {
+                    invHelper[i] = inv.items[i];
+                }                
+            }
+            inv.items = invHelper;
+            reorganizeInventory(inv);
+        }
+        private void reorganizeInventory(Inventory inv)
+        {
+            int nullFoundHelper = 0;
+            AItem[] invHelper = new AItem[inv.items.Length];
+            for (int i = 0; i < inv.items.Length; i++)
+            {
+                if (inv.items[i] != null)
+                {
+                    invHelper[i - nullFoundHelper] = inv.items[i];
+                }
+                else
+                {
+                    nullFoundHelper++;
+                }
+            }
+            inv.items = invHelper;
+        }
     }
 }
