@@ -79,6 +79,7 @@ namespace Tamagochi.Core.UI
             public const string AddItem = "2 - Add item to inventory";
             public const string RemoveItem = "3 - Remove item from inventory";
             public const string ItemAdded = "You added a {0} to the inventory";
+            public const string ItemDeleted = "You deleted the item from the inventory";
         }
         public static class CatsSprites
         {
@@ -108,7 +109,7 @@ namespace Tamagochi.Core.UI
         {
             public const string Eat = "{0} eats the {1}";
             public const string Play = "{0} plays with the {1}";
-            public const string Sleep = "{0} sleeps peacfully";
+            public const string Sleep = "{0} sleeps peacefully";
         }
         public static class ChoosePet
         {
@@ -141,6 +142,10 @@ namespace Tamagochi.Core.UI
             public const string Inventory = "4 - Inventory";
             public const string Exit = "5 - Kill the pet";
 
+        }
+        public static class EmotionResponse
+        {
+            public const string NoPlay = "{0} is too {1} to play with you";
         }
         public static string DrawStatBar(int value)
         {
