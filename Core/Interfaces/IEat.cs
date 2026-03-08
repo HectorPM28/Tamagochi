@@ -9,9 +9,6 @@ namespace Tamagochi.Core.Interfaces
 {
     public interface IEat
     {
-        public void Eat(APet pet, Food food)
-        {
-            Console.WriteLine(UIConfig.PetActions.Eat, pet.Name, food.Type);
-        }
+        void Eat(APet pet, AItem food);
     }
 }

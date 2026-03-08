@@ -8,7 +8,7 @@ using Tamagochi.Core.UI;
 
 namespace Tamagochi.Core.Models
 {
-    public class Cat: APet, ISleep, IEat, IPlay
+    public class Cat : APet, ISleep, IEat
     {
         public Cat(string name) : base(name)
         {
@@ -35,6 +35,20 @@ namespace Tamagochi.Core.Models
                     break;
             }
         }
+
+        public void Eat(APet pet, AItem food)
+        {
+            if (food is Food realFood)
+            {
+                Console.WriteLine(UIConfig.PetActions.Eat, pet.Name, realFood.Type);
+                pet.Stats.Satiety += (int)realFood.Type;
+                if (realFood.Type is ETypeFood.Snack)
+                {
+                    pet.State = EEmotions.Happy;
+                }
+            }
+        }
+
         public void Sleep(APet pet)
         {
             Console.WriteLine(UIConfig.PetActions.Sleep, pet.Name);
