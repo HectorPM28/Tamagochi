@@ -36,6 +36,34 @@ namespace Tamagochi.Core.UI
             Console.WriteLine(TamagochiBase.petBirth, pet.DateBirth);
             Console.WriteLine(TamagochiBase.SquareBase);
         }
+        public static void ShowInventoryOptions()
+        {
+            Console.WriteLine(InventoryOptions.OpenInventory);
+            Console.WriteLine(InventoryOptions.AddItem);
+            Console.WriteLine(InventoryOptions.RemoveItem);
+        }
+        public static void ShowItemOptions()
+        {
+            Console.WriteLine(ItemOptions.Meal);
+            Console.WriteLine(ItemOptions.Snack);
+            Console.WriteLine(ItemOptions.Ball);
+            Console.WriteLine(ItemOptions.Rope);
+            Console.WriteLine(ItemOptions.ChewToy);
+        }
+        public static class ItemOptions
+        {
+            public const string Meal = "1 - Meal";
+            public const string Snack = "2 - Snack";
+            public const string Ball = "3 - Ball";
+            public const string Rope = "4 - Rope";
+            public const string ChewToy = "5 - Chew toy";
+        }
+        public static class InventoryOptions
+        {
+            public const string OpenInventory = "1 - Open inventory";
+            public const string AddItem = "2 - Add item to inventory";
+            public const string RemoveItem = "3 - Remove item from inventory";
+        }
         public static class CatsSprites
         {
             public const string HappyCat = "      /\\_/\\      \r\n     ( ^‿^ )     \r\n     /       \\    \r\n    |         |   \r\n     \\__/\\___/    ";         
@@ -76,10 +104,10 @@ namespace Tamagochi.Core.UI
         }
         public static class IntErrorControl
         {
-            public const string FormatError = "Must insert a number";
-            public const string OverflowException = "Must insert a tinier number";
             public const string NotAPetOptError = "Number must be between 1-3";
             public const string NotAMenuOptError = "Number must be between 1-5";
+            public const string NotAInvOptError = "Number must be between 1-3";
+            public const string NotAItemOptError = "Number must be between 1-5";
         }
         public static class TamagochiBase
         {
