@@ -11,43 +11,15 @@ public class Program
     {
         Console.OutputEncoding = System.Text.Encoding.Unicode;
 
-        const int minMenuValue = 1, maxMenuValue = 5, minPetOptValue = 1, maxPetOptValue = 3;
+        const int minMenuValue = 1, maxMenuValue = 5, minPetOptValue = 1, maxPetOptValue = 3, minInvOpt = 1, maxInvOpt = 3, minItemOpt = 1, maxItemOpt = 5;
 
         string petName;
-        int petSelector = 0, op = 0;
-        bool existingOpt;
+        int petSelector = 0, op = 0, invOp = 0, itemOp = 0, deleteItemOp = 0;
+        bool existingOpt = false;
 
-        do
-        {
-            UIConfig.ShowPetOptions();
-
-            try
-            {
-                petSelector = Convert.ToInt32(Console.ReadLine());
-                existingOpt = true;
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine(UIConfig.IntErrorControl.FormatError);
-                existingOpt = false;
-            }
-            catch (OverflowException)
-            {
-                Console.WriteLine(UIConfig.IntErrorControl.OverflowException);
-                existingOpt = false;
-            }
-            catch (Exception)
-            {
-                Console.WriteLine(UIConfig.IntErrorControl.FormatError);
-                existingOpt = false;
-            }
-            Console.Clear();
-            if(petSelector < minPetOptValue || petSelector > maxPetOptValue)
-            {
-                existingOpt = false;
-                Console.WriteLine(UIConfig.IntErrorControl.NotAPetOptError);
-            }
-        } while (!existingOpt);
+        UIConfig.ShowPetOptions();
+        petSelector = CheckInt(petSelector, existingOpt, minPetOptValue, maxPetOptValue, UIConfig.IntErrorControl.NotAPetOptError);
+        Console.Clear();
 
         Console.WriteLine(UIConfig.ChoosePet.SetName);
         petName = Console.ReadLine();
@@ -66,35 +38,8 @@ public class Program
             ShowPet(player.Pet);
             UIConfig.ShowStatsBars(player.Pet);
             UIConfig.ShowActions();
-            do
-            {
-                try
-                {
-                    op = Convert.ToInt32(Console.ReadLine());
-                    existingOpt = true;
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine(UIConfig.IntErrorControl.FormatError);
-                    existingOpt = false;
-                }
-                catch (OverflowException)
-                {
-                    Console.WriteLine(UIConfig.IntErrorControl.OverflowException);
-                    existingOpt = false;
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine(UIConfig.IntErrorControl.FormatError);
-                    existingOpt = false;
-                }
-                if (op < minMenuValue || op > maxMenuValue) 
-                {
-                    existingOpt = false;
-                    Console.WriteLine(UIConfig.IntErrorControl.NotAMenuOptError);
-                }
-            } while (!existingOpt);
-
+            op = CheckInt(op, existingOpt, minMenuValue, maxMenuValue, UIConfig.IntErrorControl.NotAMenuOptError);
+            
             switch (op)
             {
                 case 1:
@@ -108,6 +53,65 @@ public class Program
                     }
                     break;
                 case 4:
+                    Console.Clear();
+                    UIConfig.ShowInventoryOptions();
+                    invOp = CheckInt(invOp, existingOpt, minInvOpt, maxInvOpt, UIConfig.IntErrorControl.NotAInvOptError);
+
+                    switch (invOp)
+                    {
+                        case 1:
+                            Console.Clear();
+                            player.Inventory.openInventory(player.Inventory);
+                            Console.ReadKey();
+                            break;
+                        case 2:
+                            Console.Clear();
+                            UIConfig.ShowItemOptions();
+                            itemOp = CheckInt(itemOp, existingOpt, minItemOpt, maxItemOpt, UIConfig.IntErrorControl.NotAItemOptError);
+
+                            switch (itemOp)
+                            {
+                                case 1:
+                                    Food meal = new Food(Tamagochi.Core.Models.Enum.ETypeFood.Meal);
+                                    player.Inventory.addItem(meal, player.Inventory);
+                                    Console.WriteLine(UIConfig.InventoryOptions.ItemAdded, meal.Type);
+                                    Console.ReadKey();
+                                    break;
+                                case 2:
+                                    Food snack = new Food(Tamagochi.Core.Models.Enum.ETypeFood.Snack);
+                                    player.Inventory.addItem(snack, player.Inventory);
+                                    Console.WriteLine(UIConfig.InventoryOptions.ItemAdded, snack.Type);
+                                    Console.ReadKey();
+                                    break;
+                                case 3:
+                                    Toy ball = new Toy(Tamagochi.Core.Models.Enum.ETypeToys.Ball);
+                                    player.Inventory.addItem(ball, player.Inventory);
+                                    Console.WriteLine(UIConfig.InventoryOptions.ItemAdded, ball.Type);
+                                    Console.ReadKey();
+                                    break;
+                                case 4:
+                                    Toy rope = new Toy(Tamagochi.Core.Models.Enum.ETypeToys.Rope);
+                                    player.Inventory.addItem(rope, player.Inventory);
+                                    Console.WriteLine(UIConfig.InventoryOptions.ItemAdded, rope.Type);
+                                    Console.ReadKey();
+                                    break;
+                                case 5:
+                                    Toy chewtoy = new Toy(Tamagochi.Core.Models.Enum.ETypeToys.ChewToy);
+                                    player.Inventory.addItem(chewtoy, player.Inventory);
+                                    Console.WriteLine(UIConfig.InventoryOptions.ItemAdded, chewtoy.Type);
+                                    Console.ReadKey();
+                                    break;
+                            }                            
+                            break;
+                        case 3:
+                            Console.Clear();
+                            Console.WriteLine(UIConfig.InventoryOptions.DeleteItemMenu);
+                            player.Inventory.openInventory(player.Inventory);
+                            deleteItemOp = CheckInt(deleteItemOp, existingOpt, minItemOpt, player.Inventory.items.Length, UIConfig.IntErrorControl.NotInInvError);
+                            player.Inventory.deleteItem(player.Inventory.items[deleteItemOp - 1], player.Inventory);
+                            Console.ReadKey();
+                            break;
+                    }
                     break;
                 case 5:
                     player.Pet.DeadState = true;
@@ -183,5 +187,34 @@ public class Program
                 break;
             
         }
-    }        
+    }
+    public static int CheckInt(int op, bool existingOpt, int minValue, int maxValue, string errorText)
+    {
+        do
+        {
+            try
+            {
+                op = Convert.ToInt32(Console.ReadLine());
+                existingOpt = true;
+            }
+            catch (FormatException)
+            {
+                existingOpt = false;
+            }
+            catch (OverflowException)
+            {
+                existingOpt = false;
+            }
+            catch (Exception)
+            {
+                existingOpt = false;
+            }
+            if (op < minValue || op > maxValue)
+            {
+                existingOpt = false;
+                Console.WriteLine(errorText);
+            }
+        } while (!existingOpt);
+        return op;
+    }
 }
