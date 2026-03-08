@@ -50,6 +50,12 @@ namespace Tamagochi.Core.UI
             Console.WriteLine(ItemOptions.Rope);
             Console.WriteLine(ItemOptions.ChewToy);
         }
+        public static class WrongItemsUsed
+        {
+            public const string NotAFood = "The item selected isn't a food";
+            public const string NotAToy = "The item isn't a toy";
+            public const string EmptyInv = "The inventory is empty";
+        }
         public static class ItemOptions
         {
             public const string Meal = "1 - Meal";
@@ -57,6 +63,14 @@ namespace Tamagochi.Core.UI
             public const string Ball = "3 - Ball";
             public const string Rope = "4 - Rope";
             public const string ChewToy = "5 - Chew toy";
+            public const string EatFood = "Which food would you like to eat";
+            public const string DeleteItemMenu = "Which item would you like to delete";
+        }
+        public static class PetCantAct
+        {
+            public const string CantSleep = "This pet can't rest";
+            public const string CantEat = "This pet can't eat";
+            public const string CantPlay = "This pet can't play";
         }
         public static class InventoryOptions
         {
@@ -64,11 +78,10 @@ namespace Tamagochi.Core.UI
             public const string AddItem = "2 - Add item to inventory";
             public const string RemoveItem = "3 - Remove item from inventory";
             public const string ItemAdded = "You added a {0} to the inventory";
-            public const string DeleteItemMenu = "Which item would you like to delete";
         }
         public static class CatsSprites
         {
-            public const string HappyCat = "      /\\_/\\      \r\n     ( ^‿^ )     \r\n     /       \\    \r\n    |         |   \r\n     \\__/\\___/    ";         
+            public const string HappyCat = "      /\\_/\\      \r\n     ( ^‿^ )     \r\n     /       \\    \r\n    |         |   \r\n     \\__/\\___/    ";
             public const string SadCat = "      /\\_/\\      \r\n     ( ╥﹏╥ )     \r\n     /       \\    \r\n    |         |   \r\n     \\__/\\___/    ";
             public const string AngryCat = "      /\\_/\\      \r\n     ( @_@ )     \r\n     /       \\    \r\n    |         |   \r\n     \\__/\\___/    ";
             public const string TiredCat = "      /\\_/\\      \r\n     ( -_- ) zzz     \r\n     /       \\    \r\n    |         |   \r\n     \\__/\\___/    ";
@@ -114,10 +127,10 @@ namespace Tamagochi.Core.UI
         }
         public static class TamagochiBase
         {
-            public const string Spacer     = "----------------------------------";
+            public const string Spacer = "----------------------------------";
             public const string SquareBase = "==================================";
-            public const string petInfo    = "    Name: {0} Status: {1}";
-            public const string petBirth   = "=    Birth: {0}   ="; 
+            public const string petInfo = "    Name: {0} Status: {1}";
+            public const string petBirth = "=    Birth: {0}   =";
         }
         public static class ActionsMenu
         {
@@ -126,7 +139,7 @@ namespace Tamagochi.Core.UI
             public const string Sleep = "3 - Sleep";
             public const string Inventory = "4 - Inventory";
             public const string Exit = "5 - Kill the pet";
-            
+
         }
         public static string DrawStatBar(int value)
         {

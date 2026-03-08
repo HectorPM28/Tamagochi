@@ -17,42 +17,16 @@ namespace Tamagochi.Core.Models
 
         public void openInventory(Inventory inv)
         {
-            for(int i = 0; i < inv.items.Length; i++)
-            {
-                if (inv.items[i] is Food food)
-                {
-                    Console.WriteLine($"{i + 1} - {food.Type}");
-                }
-                if (inv.items[i] is Toy toy)
-                {
-                    Console.WriteLine($"{i + 1} - {toy.Type}");
-                }
-            }
-        }
-        public void openToyInventory(Inventory inv)
-        {
-            for (int i = 0; i < inv.items.Length; i++)
-            {                
-                if (inv.items[i] is Toy toy)
-                {
-                    Console.WriteLine($"{i + 1} - {toy.Type}");
-                }
-            }
-        }
-        public void openFoodInventory(Inventory inv)
-        {
             for (int i = 0; i < inv.items.Length; i++)
             {
-                if (inv.items[i] is Food food)
-                {
-                    Console.WriteLine($"{i + 1} - {food.Type}");
-                }
+                if (inv.items[i] is Food food) Console.WriteLine($"{i + 1} - {food.Type}");
+                if (inv.items[i] is Toy toy) Console.WriteLine($"{i + 1} - {toy.Type}");
             }
         }
         public void addItem(AItem item, Inventory inv)
         {
             AItem[] invHelper = new AItem[inv.items.Length + 1];
-            for( int i = 0; i < inv.items.Length; i++)
+            for (int i = 0; i < inv.items.Length; i++)
             {
                 invHelper[i] = inv.items[i];
             }
@@ -67,7 +41,7 @@ namespace Tamagochi.Core.Models
                 if (inv.items[i] != item)
                 {
                     invHelper[i] = inv.items[i];
-                }                
+                }
             }
             inv.items = invHelper;
             reorganizeInventory(inv);

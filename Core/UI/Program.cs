@@ -14,7 +14,7 @@ public class Program
         const int minMenuValue = 1, maxMenuValue = 5, minPetOptValue = 1, maxPetOptValue = 3, minInvOpt = 1, maxInvOpt = 3, minItemOpt = 1, maxItemOpt = 5;
 
         string petName;
-        int petSelector = 0, op = 0, invOp = 0, itemOp = 0, deleteItemOp = 0;
+        int petSelector = 0, op = 0, invOp = 0, itemOp = 0, deleteItemOp = 0, eatFoodOp = 0;
         bool existingOpt = false;
 
         UIConfig.ShowPetOptions();
@@ -24,7 +24,7 @@ public class Program
         Console.WriteLine(UIConfig.ChoosePet.SetName);
         petName = Console.ReadLine();
 
-        if(petName == null)
+        if (petName == "")
         {
             petName = "SinNombre";
         }
@@ -39,12 +39,36 @@ public class Program
             UIConfig.ShowStatsBars(player.Pet);
             UIConfig.ShowActions();
             op = CheckInt(op, existingOpt, minMenuValue, maxMenuValue, UIConfig.IntErrorControl.NotAMenuOptError);
-            
+
             switch (op)
             {
                 case 1:
                     break;
                 case 2:
+                    Console.Clear();
+                    if (player.Inventory.items == Array.Empty<AItem>() || player.Inventory.items[0] == null)
+                    {
+                        Console.WriteLine(UIConfig.WrongItemsUsed.EmptyInv);
+                    }
+                    else
+                    {
+                        if (player.Pet is IEat eatingPet)
+                        {
+                            Console.WriteLine(UIConfig.ItemOptions.EatFood);
+                            player.Inventory.openInventory(player.Inventory);
+                            eatFoodOp = CheckInt(eatFoodOp, existingOpt, minItemOpt, player.Inventory.items.Length, UIConfig.IntErrorControl.NotInInvError);
+                            if (player.Inventory.items[eatFoodOp - 1] is Food)
+                            {
+                                eatingPet.Eat(player.Pet, player.Inventory.items[eatFoodOp - 1]);
+                                player.Inventory.deleteItem(player.Inventory.items[eatFoodOp - 1], player.Inventory);
+                            }
+                            else
+                            {
+                                Console.WriteLine(UIConfig.WrongItemsUsed.NotAFood);
+                            }
+                        }
+                    }
+                    Console.ReadKey();
                     break;
                 case 3:
                     if (player.Pet is ISleep sleepingPet)
@@ -101,11 +125,11 @@ public class Program
                                     Console.WriteLine(UIConfig.InventoryOptions.ItemAdded, chewtoy.Type);
                                     Console.ReadKey();
                                     break;
-                            }                            
+                            }
                             break;
                         case 3:
                             Console.Clear();
-                            Console.WriteLine(UIConfig.InventoryOptions.DeleteItemMenu);
+                            Console.WriteLine(UIConfig.ItemOptions.DeleteItemMenu);
                             player.Inventory.openInventory(player.Inventory);
                             deleteItemOp = CheckInt(deleteItemOp, existingOpt, minItemOpt, player.Inventory.items.Length, UIConfig.IntErrorControl.NotInInvError);
                             player.Inventory.deleteItem(player.Inventory.items[deleteItemOp - 1], player.Inventory);
@@ -152,7 +176,7 @@ public class Program
             Console.Clear();
         } while (!player.Pet.DeadState);
         Console.WriteLine("Your pet died, happy?");
-    }    
+    }
     public static APet AdoptPet(int numPet, string petName)
     {
         switch (numPet)
@@ -171,7 +195,7 @@ public class Program
                 Dog nonExistentPet = new Dog(petName);
                 return nonExistentPet;
         }
-    } 
+    }
     public static void ShowPet(APet pet)
     {
         switch (pet)
@@ -185,7 +209,7 @@ public class Program
             case Chicken:
                 Chicken.ShowEmotion(pet);
                 break;
-            
+
         }
     }
     public static int CheckInt(int op, bool existingOpt, int minValue, int maxValue, string errorText)
