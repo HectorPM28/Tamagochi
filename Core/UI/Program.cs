@@ -88,7 +88,7 @@ public class Program
                     Console.WriteLine(UIConfig.IntErrorControl.FormatError);
                     existingOpt = false;
                 }
-                if (op < minMenuValue || op > maxMenuValue)
+                if (op < minMenuValue || op > maxMenuValue) 
                 {
                     existingOpt = false;
                     Console.WriteLine(UIConfig.IntErrorControl.NotAMenuOptError);
