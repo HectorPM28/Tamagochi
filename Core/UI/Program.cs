@@ -14,7 +14,7 @@ public class Program
         const int minMenuValue = 1, maxMenuValue = 5, minPetOptValue = 1, maxPetOptValue = 3, minInvOpt = 1, maxInvOpt = 3, minItemOpt = 1, maxItemOpt = 5;
 
         string petName;
-        int petSelector = 0, op = 0, invOp = 0, itemOp = 0, deleteItemOp = 0, eatFoodOp = 0;
+        int petSelector = 0, op = 0, invOp = 0, itemOp = 0, deleteItemOp = 0, useItemOp = 0;
         bool existingOpt = false;
 
         UIConfig.ShowPetOptions();
@@ -43,6 +43,29 @@ public class Program
             switch (op)
             {
                 case 1:
+                    Console.Clear();
+                    if (player.Inventory.items == Array.Empty<AItem>() || player.Inventory.items[0] == null)
+                    {
+                        Console.WriteLine(UIConfig.WrongItemsUsed.EmptyInv);
+                    }
+                    else
+                    {
+                        if (player.Pet is IPlay playingPet)
+                        {
+                            Console.WriteLine(UIConfig.ItemOptions.PlayWithToy);
+                            player.Inventory.openInventory(player.Inventory);
+                            useItemOp = CheckInt(useItemOp, existingOpt, minItemOpt, player.Inventory.items.Length, UIConfig.IntErrorControl.NotInInvError);
+                            if (player.Inventory.items[useItemOp - 1] is Toy)
+                            {
+                                playingPet.Play(player.Inventory.items[useItemOp - 1], player.Pet);
+                            }
+                            else
+                            {
+                                Console.WriteLine(UIConfig.WrongItemsUsed.NotAToy);
+                            }
+                        }
+                    }
+                    Console.ReadKey();
                     break;
                 case 2:
                     Console.Clear();
@@ -56,11 +79,11 @@ public class Program
                         {
                             Console.WriteLine(UIConfig.ItemOptions.EatFood);
                             player.Inventory.openInventory(player.Inventory);
-                            eatFoodOp = CheckInt(eatFoodOp, existingOpt, minItemOpt, player.Inventory.items.Length, UIConfig.IntErrorControl.NotInInvError);
-                            if (player.Inventory.items[eatFoodOp - 1] is Food)
+                            useItemOp = CheckInt(useItemOp, existingOpt, minItemOpt, player.Inventory.items.Length, UIConfig.IntErrorControl.NotInInvError);
+                            if (player.Inventory.items[useItemOp - 1] is Food)
                             {
-                                eatingPet.Eat(player.Pet, player.Inventory.items[eatFoodOp - 1]);
-                                player.Inventory.deleteItem(player.Inventory.items[eatFoodOp - 1], player.Inventory);
+                                eatingPet.Eat(player.Pet, player.Inventory.items[useItemOp - 1]);
+                                player.Inventory.deleteItem(player.Inventory.items[useItemOp - 1], player.Inventory);
                             }
                             else
                             {

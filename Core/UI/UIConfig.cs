@@ -64,6 +64,7 @@ namespace Tamagochi.Core.UI
             public const string Rope = "4 - Rope";
             public const string ChewToy = "5 - Chew toy";
             public const string EatFood = "Which food would you like to eat";
+            public const string PlayWithToy = "Which toy would you like to play with";
             public const string DeleteItemMenu = "Which item would you like to delete";
         }
         public static class PetCantAct

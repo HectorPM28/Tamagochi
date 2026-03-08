@@ -9,9 +9,6 @@ namespace Tamagochi.Core.Interfaces
 {
     public interface IPlay
     {
-        public void Play(Toy toy, APet pet)
-        {
-            Console.WriteLine(UIConfig.PetActions.Play, pet.Name, toy.Type);
-        }
+        void Play(AItem toy, APet pet);   
     }
 }
