@@ -11,3 +11,4 @@ As the player you also have an inventory that lets you add different items neede
 
 # UML 
 <img width="1532" height="1124" alt="Captura de pantalla 2026-03-08 213511" src="https://github.com/user-attachments/assets/587e85f1-8a6c-4e13-9a36-f50a134d5c7c" />
+(Cambia els atributs de Pet a privats i les funcions a publiques)
